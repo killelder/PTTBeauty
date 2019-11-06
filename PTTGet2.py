@@ -129,7 +129,7 @@ def getimg(url, timeflag, count):
         for item in soup3:
             if sc(item.text.encode("utf-8"), "jpg"):
                 sname = item.text.encode("utf-8").split("/")[3].split(".jpg")[0]
-                print sname
+                print (sname)
                 if (os.path.exists("./beauty/" + timeflag + "/%sjpg" % sname)):
                     continue#print item.text.encode("utf-8")
                 else:
@@ -144,7 +144,7 @@ def getimg(url, timeflag, count):
                     time.sleep(0.1)
         
 def getpage(url, thispage):
-    print url
+    print (url)
     
     res = req_loop(url, 0)
     if res == None:
@@ -166,7 +166,7 @@ def getpage(url, thispage):
                 continue
         else:
             if int(soup3[0].text.encode("utf-8")) > 90:
-                print int(soup3[0].text.encode("utf-8"))
+                print (int(soup3[0].text.encode("utf-8")))
             else:
                 continue
         url1 = item.findAll('a', href = True)
@@ -174,13 +174,14 @@ def getpage(url, thispage):
         
         if len(url1) > 0:
             #print 
-            print timeflag#print soup3
+            print (timeflag)#print soup3
             getimg("https://www.ptt.cc/bbs" + str(url1[0]).split("/bbs")[1].split("\"")[0], timeflag, 0)
     nextpage = getboardindex(url, thispage, 0)
-    print nextpage
+    print (nextpage)
     thispage = nextpage
     getpage("https://www.ptt.cc/bbs/Beauty/index" + str(nextpage) + ".html", thispage)
-    time.sleep(0.1)
+    time.sleep(0.5)
+
 if __name__ == '__main__':
     if os.path.exists("./beauty") == False:
         os.mkdir("./beauty")
